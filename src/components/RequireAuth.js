@@ -13,6 +13,12 @@ export default function(ComposedComponent) {
             }
         }
 
+        componentWillUpdate(nextProps) {
+            if (!nextProps.authenticated) {
+                this.context.router.history.push('/');
+            }
+        }
+
         render() {
             return <ComposedComponent {...this.props} />;
         };
