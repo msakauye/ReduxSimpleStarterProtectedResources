@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Header extends Component {
     authButton() {
-        return <button>Sign in</button>;
+        return (
+            <button onClick={() => this.props.authenticate(!this.props.authenticated)}>
+                Sign {this.props.authenticated ? 'Out' : 'In'}
+            </button>
+        );
     }
 
     render() {
@@ -26,4 +31,6 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default connect(({ authenticated }) => {
+    return { authenticated };
+}, actions)(Header);
